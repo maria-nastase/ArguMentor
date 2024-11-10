@@ -9,6 +9,8 @@ interface AppStateContextProps {
   setResponse: React.Dispatch<React.SetStateAction<string | null>>;
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  history: Array<string>;
+  appendToLog: (t: string) => void
 }
 
 // Create context
@@ -18,6 +20,11 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [inputText, setInputText] = useState('');
   const [response, setResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  const appendToLog = (text) => {
+    setHistory(current => [...current, text]);
+  }
 
     // Memoize the context value to avoid unnecessary re-renders
     const contextValue = useMemo(() => ({
@@ -26,8 +33,10 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
         response,
         setResponse,
         isLoading,
-        setIsLoading
-      }), [response, isLoading, inputText]);
+        setIsLoading,
+        history,
+        appendToLog
+      }), [response, isLoading, inputText, history]);
     
     
 

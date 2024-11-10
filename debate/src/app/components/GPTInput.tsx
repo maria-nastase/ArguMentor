@@ -2,7 +2,7 @@ import { useAppState } from "./AppStateContext";
 
 export default function GPTInput(){
 
-    const {setInputText, setIsLoading, setResponse, inputText, isLoading} =  useAppState();
+    const {setInputText, setIsLoading, appendToLog, inputText, isLoading} =  useAppState();
 
     const handleChange = (event) => {
         setInputText(event.target.value);
@@ -11,7 +11,7 @@ export default function GPTInput(){
       const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && inputText.trim() && !isLoading) {
           setIsLoading(true);
-          setResponse(null);
+          appendToLog(inputText);
     
           try {
             const res = await fetch('/api/response', {
@@ -23,10 +23,10 @@ export default function GPTInput(){
             });
     
             const data = await res.json();
-            setResponse(data.response);
+            appendToLog(data.response);
           } catch (error) {
             console.error('Error posting data:', error);
-            setResponse('There was an error processing your request.');
+            appendToLog('There was an error processing your request.');
           } finally {
             setIsLoading(false);
           }
