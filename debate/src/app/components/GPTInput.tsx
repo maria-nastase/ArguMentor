@@ -95,10 +95,9 @@ export default function GPTInput(){
 
     return (
         <>
-            <input 
+            <textarea 
                 style={{ backgroundColor: '#FA9746' }}
-                className="w-1/2 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
-                type="text"
+                className="w-3/4 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 value={inputText}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
