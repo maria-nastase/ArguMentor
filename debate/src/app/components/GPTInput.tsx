@@ -3,9 +3,13 @@ import { useAppState } from "./AppStateContext";
 
 export default function GPTInput(){
 
-    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore, setSuggestions} =  useAppState();
+    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore, setSuggestions, setIsTyping} =  useAppState();
 
     const [isRecentlyChanged, setIsRecentlyChanged] = useState(false);
+
+    useEffect(() => {
+        setIsTyping(isRecentlyChanged);
+      }, [isRecentlyChanged]);
   
     useEffect(() => {
       if (!isRecentlyChanged) return;
