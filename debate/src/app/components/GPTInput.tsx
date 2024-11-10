@@ -2,7 +2,7 @@ import { useAppState } from "./AppStateContext";
 
 export default function GPTInput(){
 
-    const {setInputText, setIsLoading, appendToLog, inputText, isLoading} =  useAppState();
+    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore} =  useAppState();
 
     const handleChange = (event) => {
         setInputText(event.target.value);
@@ -24,6 +24,25 @@ export default function GPTInput(){
     
             const data = await res.json();
             appendToLog(data.response);
+
+
+
+            const scoreRes = await fetch('/api/score', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ text: inputText }),
+            });
+    
+            const scoreData = await scoreRes.json();
+            console.log('Score data:', scoreData);
+            console.log('Setting score:', scoreData.score);
+            setScore(scoreData.score);
+            console.log('Setting score:', scoreData.score);
+
+
+
           } catch (error) {
             console.error('Error posting data:', error);
             appendToLog('There was an error processing your request.');

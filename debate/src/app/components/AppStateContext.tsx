@@ -10,7 +10,9 @@ interface AppStateContextProps {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   history: Array<string>;
-  appendToLog: (t: string) => void
+  appendToLog: (t: string) => void;
+  score: string | null;
+  setScore: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 // Create context
@@ -21,6 +23,7 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [response, setResponse] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState([]);
+  const [score, setScore] = useState<string | null>(null);
 
   const appendToLog = (text) => {
     setHistory(current => [...current, text]);
@@ -35,8 +38,10 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
         isLoading,
         setIsLoading,
         history,
-        appendToLog
-      }), [response, isLoading, inputText, history]);
+        appendToLog,
+        score,
+        setScore
+      }), [response, isLoading, inputText, history, score]);
     
     
 
