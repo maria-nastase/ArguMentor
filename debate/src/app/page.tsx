@@ -3,6 +3,7 @@ import GPTInput from './components/GPTInput';
 import AppStateProvider from './components/AppStateContext';
 import ResponseLog from './components/ResponseLog';
 import { useState } from 'react';
+import BGImage from './components/BGImage';
 
 
 export default function Home(){
@@ -13,6 +14,7 @@ export default function Home(){
 
           <ResponseLog></ResponseLog>
           <GPTInput></GPTInput>
+          <BGImage></BGImage>
         </main>
         <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         </footer>
