@@ -1,9 +1,14 @@
-import Image from "next/image";
+import SVGEmbed from "./SVGEmbed.svg"
+import SvgIcon from "./SvgIcon";
 
 export default function BGImage() {
-    return (<img
-        className="absolute bottom-0 z-[-100] aspect-[2/1]"
-        src="/8533.svg"
-        alt="Debating characters"
-    />);
+    return <div   style={{
+        backgroundColor: 'lightpink',
+        resize: 'horizontal',
+        overflow: 'hidden',
+        width: '10000px',
+        height: 'auto',
+      }} id="stageContainer">
+        <SvgIcon></SvgIcon>
+    </div>;
 }
