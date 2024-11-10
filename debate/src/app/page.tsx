@@ -2,6 +2,7 @@
 import AppStateProvider from './components/AppStateContext';
 import ResponseLog from './components/ResponseLog';
 import BGImage from './components/BGImage';
+import AudioPlayer from './components/AudioPlayer';
 
 
 export default function Home() {

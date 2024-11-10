@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppState } from "./AppStateContext";
 import AudioRecorder from "./AudioRecorder";
+import AudioPlayer from "./AudioPlayer";
 
 export default function GPTInput(){
 
@@ -74,7 +75,7 @@ export default function GPTInput(){
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({ text: readData }),
+              body: JSON.stringify({ text: `${data.response}\nScore: ${scoreData.score}\n${suggestionsData.suggestion}` }),
             });
 
             addScoreToLog(suggestionsData.suggestion, scoreData.score);
@@ -106,7 +107,9 @@ export default function GPTInput(){
             
           <div className="button">
             <AudioRecorder />
-            </div>
+          </div>
+          <AudioPlayer />
         </>
+
     );
 };
