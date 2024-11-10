@@ -30,7 +30,7 @@
      transform="matrix(1.3333333,0,0,-1.3333333,0,2666.6667)">
     <g
        id="g10"
-       transform="scale(0.1)">
+       transform="translate(0,-230) scale(0.1)">
       <path
          d="M 0,0 H 32000 V 20000 H 0 Z"
          style="fill:#ffffff;fill-opacity:0;fill-rule:nonzero;stroke:none"
