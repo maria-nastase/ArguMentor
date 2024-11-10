@@ -124,7 +124,7 @@ export default function GPTInput(){
     return (
         <>  
             <textarea
-                style={{ backgroundColor: '#c65547', overflow: 'hidden', marginTop: '10px', marginBottom: '20px' }}
+                style={{ backgroundColor: 'rgba(198, 85, 71, 0.97)', overflow: 'hidden', marginTop: '10px', marginBottom: '20px' }}
                 className="w-3/4 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 value={inputText}
                 onChange={handleChange}

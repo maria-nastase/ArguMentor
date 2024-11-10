@@ -15,8 +15,8 @@ export default function SpeechBubble({arr, index}){
 
     return <div key={index} className={containerClasses}>
         <div className={bubbleClasses}>{arr.text} 
-        {showSugg ? <div className="bg-opacity-50 text-white p-3 rounded-md bg-green-900"><span className="font-bold">Suggestion: </span>{arr.suggestion}</div> : ""}
-        {arr.isUser ? <div onClick={handleClick} className={`${classArrow} className="text-white p-3 rounded-md`}>{showSugg ? <FaChevronUp></FaChevronUp>:<FaChevronDown></FaChevronDown>}</div> : ""}
-        {arr.isUser ? <div className="text-white p-3 rounded-md bg-orange-500 absolute p-1 -bottom-7 -right-2">{arr.score < 0 ? "..." : arr.score}</div> : ""}</div>
+        {showSugg ? <div className="mt-4 bg-opacity-50 text-white p-3 rounded-md bg-orange-500"><span className="font-bold">Suggestion: </span>{arr.suggestion}</div> : ""}
+        {arr.isUser ? <div style={{ backgroundColor: 'rgba(175, 195, 254, 0.9)'}} onClick={handleClick} className={`${classArrow} className="text-white p-2 rounded-md bg-purple-200`}>{showSugg ? <FaChevronUp></FaChevronUp>:<FaChevronDown></FaChevronDown>}</div> : ""}
+        {arr.isUser ? <div className="text-white p-1 rounded-md bg-orange-500 bg-opacity-90 absolute -bottom-7 -right-2">{arr.score < 0 ? "..." : arr.score}</div> : ""}</div>
     </div>;
 }
