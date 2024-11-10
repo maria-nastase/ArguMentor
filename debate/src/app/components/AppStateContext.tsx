@@ -15,6 +15,8 @@ interface AppStateContextProps {
   setScore: React.Dispatch<React.SetStateAction<string | null>>;
   suggestion: string | null;
   setSuggestions: React.Dispatch<React.SetStateAction<string | null>>;
+  isTyping: boolean;
+  setIsTyping: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Create context
@@ -27,6 +29,7 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [history, setHistory] = useState([]);
   const [score, setScore] = useState<string | null>(null);
   const [suggestion, setSuggestions] = useState<string | null>(null);
+  const [isTyping, setIsTyping] = useState<boolean>(false);
 
   const appendToLog = (text, isUser) => {
     setHistory(current => [...current, {text, isUser}]);
@@ -45,8 +48,10 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
         score,
         setScore,
         suggestion,
-        setSuggestions
-      }), [response, isLoading, inputText, history, score, suggestion]);
+        setSuggestions,
+        isTyping,
+        setIsTyping
+      }), [response, isLoading, inputText, history, score, suggestion, isTyping]);
     
     
 

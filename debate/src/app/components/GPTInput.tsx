@@ -1,11 +1,27 @@
+import { useEffect, useState } from "react";
 import { useAppState } from "./AppStateContext";
 
 export default function GPTInput(){
 
     const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore, setSuggestions} =  useAppState();
 
+    const [isRecentlyChanged, setIsRecentlyChanged] = useState(false);
+  
+    useEffect(() => {
+      if (!isRecentlyChanged) return;
+  
+      // Set a timer to reset the "isRecentlyChanged" state to false after 0.5 seconds
+      const timer = setTimeout(() => {
+        setIsRecentlyChanged(false);
+      }, 500);
+  
+      // Clear the timer if the component re-renders or the effect is re-triggered
+      return () => clearTimeout(timer);
+    }, [isRecentlyChanged, inputText]);
+
     const handleChange = (event) => {
         setInputText(event.target.value);
+        setIsRecentlyChanged(true); // set to true on every change
       };
     
       const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
