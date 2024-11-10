@@ -1,13 +1,24 @@
 import { useAppState } from "./AppStateContext";
+import GPTInput from "./GPTInput";
+
+function SpeechBubble({arr, index}){
+
+    const classN = "flex w-full "+ (arr.isUser ? "flex-row-reverse mt-10" : "flex-row")
+
+    return <div key={index} className={classN}>
+        <div className={arr.isUser ? "bg-color-red-500":""}>{arr.text}</div>
+    </div>;
+}
 
 export default function ResponseLog(){
     const {history, isLoading, score, suggestion} = useAppState();
 
-    return <>
-    {history.map(({text, isUser},i) => <div className={isUser ? "bg-red-500" : "bg-blue-500"} key={i}>{text}</div>)}
+    return <div className="flex-1 flex-col w-full overflow-scroll flex justify-center items-center">
+    {history.map((pr,i) => <SpeechBubble arr={pr} index={i}></SpeechBubble>)}
     {isLoading ? <div>thinking...</div>: "" }
+    <div className="flex flex-row-reverse w-full"><GPTInput></GPTInput></div>
     <div style={{ backgroundColor: '#c6d5ff', color: '#41444'}} className="bg-opacity-50 text-white p-3 rounded-md">Score: {score}</div>
-    <div>Suggestions: {suggestion}</div>
+    <div> Suggestions: {suggestion}</div>
 
-    </>;
+    </div>;
 }
