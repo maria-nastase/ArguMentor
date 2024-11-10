@@ -10,7 +10,7 @@ interface AppStateContextProps {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   history: Array<string>;
-  appendToLog: (t: string) => void;
+  appendToLog: (t: string, i: boolean) => void;
   score: string | null;
   setScore: React.Dispatch<React.SetStateAction<string | null>>;
 }
@@ -25,11 +25,11 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [history, setHistory] = useState([]);
   const [score, setScore] = useState<string | null>(null);
 
-  const appendToLog = (text) => {
-    setHistory(current => [...current, text]);
+  const appendToLog = (text, isUser) => {
+    setHistory(current => [...current, {text, isUser}]);
   }
 
-    // Memoize the context value to avoid unnecessary re-renders
+    // Memorize the context value to avoid unnecessary re-renders
     const contextValue = useMemo(() => ({
         inputText,
         setInputText,
