@@ -1,11 +1,11 @@
 import * as React from "react";
 
-const SvgIcon = (props) => (
+const SvgIcon = ({leftSpeakerAnim, rightSpeakerAnim}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     id="svg2"
-    width="4266.667"
-    height="2666.667"
+    width="100%"
+    height="100%"
     version="1.1"
     viewBox="0 0 4266.667 2666.667"
   >
@@ -88,7 +88,7 @@ const SvgIcon = (props) => (
           fillOpacity="1"
           d="M17395.5 5927.3h-234.7l7.8 59 63.7 523.7 23.3 203.5 24.9 194.3v-1.6l38.8-332.5 7.8-63.7 35.7-299.9z"
         ></path>
-        <g id="userSpeaker" fillOpacity="1">
+        <g id="userSpeaker" className={rightSpeakerAnim ? "userSpeakerAnim" : ""} fillOpacity="1">
           <path
             id="path36"
             fill="#ffb27d"
@@ -215,7 +215,7 @@ const SvgIcon = (props) => (
             d="M19926.5 14474.1c-5.3-25.6-24.4-43.3-42.7-39.5s-28.8 27.6-23.5 53.3c5.3 25.6 24.4 43.3 42.7 39.5s28.8-27.6 23.5-53.3"
           ></path>
         </g>
-        <g id="gibbidySpeaker" fillOpacity="1">
+        <g id="gibbidySpeaker" className={leftSpeakerAnim ? "gibbidySpeakerAnim" : ""} fillOpacity="1">
           <path
             id="path86"
             fill="#22407a"

@@ -21,12 +21,18 @@ body {
 }
 
 @keyframes rotateBackAndForth {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(10deg); }
+  0% { transform:  rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
   100% { transform: rotate(0deg); }
 }
 
-#userSpeaker, #gibbidySpeaker {  /* Targeting paths by their IDs */
-  transform-origin: 50% 50%; /* Adjust origin as needed */
-  animation: rotateBackAndForth 1s ease-in-out infinite;
+.userSpeakerAnim {  /* Targeting paths by their IDs */
+  transform-origin: 500% 400%;
+  animation: rotateBackAndForth 0.305s linear infinite;
+}
+
+.gibbidySpeakerAnim  {
+  transform-origin: 300% 400%;
+  animation: rotateBackAndForth 0.3s linear infinite;
 }
