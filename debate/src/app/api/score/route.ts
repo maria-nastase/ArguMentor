@@ -3,12 +3,14 @@ import { NextResponse } from 'next/server';
 import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const openai = new OpenAI({  apiKey: process.env.API_KEY_OPENAI });
 
 
 let conversationHistory = [];
 
 export async function POST(req) {
+
   try {
     const { text } = await req.json();
 

@@ -2,6 +2,7 @@
 import GPTInput from './components/GPTInput';
 import AppStateProvider from './components/AppStateContext';
 import ResponseLog from './components/ResponseLog';
+import { useState } from 'react';
 
 
 export default function Home(){
