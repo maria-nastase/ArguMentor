@@ -6,7 +6,7 @@ export default function ResponseLog(){
     return <>
     {history.map(({text, isUser},i) => <div className={isUser ? "bg-red-500" : "bg-blue-500"} key={i}>{text}</div>)}
     {isLoading ? <div>thinking...</div>: "" }
-    <div className="bg-purple-500 bg-opacity-50 text-white p-4 rounded-md">score: {score}</div>
+    <div style={{ backgroundColor: '#c6d5ff', color: '#41444'}} className="bg-opacity-50 text-white p-3 rounded-md">Score: {score}</div>
 
     </>;
 }
