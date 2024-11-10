@@ -9,8 +9,8 @@ export default function ResponseLog(){
     {history.map((pr,i) => <SpeechBubble key={i} arr={pr} index={i}></SpeechBubble>)}
     <div className="mt-60">{isLoading ? "thinking...": "" }</div>
     <div className="flex flex-row-reverse w-full"><GPTInput></GPTInput></div>
-    <div style={{ backgroundColor: '#c6d5ff', color: '#41444', margin: '10px'}} className="bg-opacity-50 text-white p-3 rounded-md"><b>Score:</b> {score}</div>
-    <div style={{ backgroundColor: '#c6d5ff', color: '#41444', margin: '10px'}} className="bg-opacity-50 text-white p-3 rounded-md"><b> Suggestions:</b> {suggestion}</div>
+    <div style={{ backgroundColor: '#afc3fe', color: '#41444', margin: '10px'}} className="bg-opacity-50 text-white p-3 rounded-md"><b>Score:</b> {score}</div>
+    <div style={{ backgroundColor: '#afc3fe', color: '#41444', margin: '10px'}} className="bg-opacity-50 text-white p-3 rounded-md"><b> Suggestions:</b> {suggestion}</div>
 
     </div>;
 }
