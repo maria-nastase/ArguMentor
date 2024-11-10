@@ -30,7 +30,7 @@ export async function POST(req) {
 
     return NextResponse.json({ response: assistantResponse });
   } catch (error) {
-    console.error("Error translating text:", error);
+    console.error("Error respoding to text:", error);
     return NextResponse.json({ error: 'Failed to process the request.' }, { status: 500 });
   }
 }

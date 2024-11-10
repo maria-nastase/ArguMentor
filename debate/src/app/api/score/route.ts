@@ -30,7 +30,7 @@ Argument: "${text}"` });
 
     return NextResponse.json({ score: assistantResponse });
   } catch (error) {
-    console.error("Error translating text:", error);
+    console.error("Error scoring text:", error);
     return NextResponse.json({ error: 'Failed to process the request.' }, { status: 500 });
   }
 }
