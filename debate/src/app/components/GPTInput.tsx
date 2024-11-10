@@ -14,7 +14,17 @@ export default function GPTInput(){
           appendToLog(inputText);
     
           try {
-            const res = await fetch('/api/response', {
+            const res = fetch('/api/response', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ text: inputText }),
+            });
+
+
+
+            const scoreRes = fetch('/api/score', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -22,20 +32,8 @@ export default function GPTInput(){
               body: JSON.stringify({ text: inputText }),
             });
     
-            const data = await res.json();
+            const [scoreData, data] = await Promise.all([scoreRes.then(r => r.json()), res.then(r => r.json())]);
             appendToLog(data.response);
-
-
-
-            const scoreRes = await fetch('/api/score', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ text: inputText }),
-            });
-    
-            const scoreData = await scoreRes.json();
             console.log('Score data:', scoreData);
             console.log('Setting score:', scoreData.score);
             setScore(scoreData.score);
