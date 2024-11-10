@@ -19,7 +19,7 @@ export async function POST(req) {
       ],
     });
 
-    return NextResponse.json({ translation: completion.choices[0].message.content });
+    return NextResponse.json({ response: completion.choices[0].message.content });
   } catch (error) {
     console.error("Error translating text:", error);
     return NextResponse.json({ error: 'Failed to translate text.' }, { status: 500 });
