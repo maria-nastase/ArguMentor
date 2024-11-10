@@ -10,12 +10,13 @@ const openai = new OpenAI(); //just magically uses OPENAI_API_KEY variable, seem
 let conversationHistory = [];
 
 export async function POST(req) {
-  console.log( "what is going on here", process.env.API_KEY_OPENAI)
 
   try {
     const { text } = await req.json();
 
-    conversationHistory.push({ role: 'user', content: `Give this debate argument a score: "${text}"` });
+    conversationHistory.push({ role: 'user', content: `Evaluate the following debate argument and assign it a numerical score out of 10. This is part of a machine learning API, so additional text or explanations should be included, ONLY numerical answer out of 10 and show that it is out of 10.
+
+Argument: "${text}"` });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4",
