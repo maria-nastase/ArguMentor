@@ -15,7 +15,7 @@ export default function Home() {
   const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && inputText.trim()) {
       try {
-        const res = await fetch('/api/gpt', {
+        const res = await fetch('/api/response', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -42,6 +42,7 @@ export default function Home() {
       placeholder="Type something here" 
     />
     <p>You typed: {inputText}</p>
+    <p>{response}</p>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
       </footer>
