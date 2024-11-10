@@ -1,58 +1,22 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from 'react';
+import GPTInput from './components/GPTInput';
+import AppStateProvider from './components/AppStateContext';
+import ResponseLog from './components/ResponseLog';
 
-export default function Home() {
 
-  const [inputText, setInputText] = useState('');
-  const [response, setResponse] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+export default function Home(){
 
-  const handleChange = (event) => {
-    setInputText(event.target.value);
-  };
-
-  const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && inputText.trim() && !isLoading) {
-      setIsLoading(true);
-      setResponse(null);
-
-      try {
-        const res = await fetch('/api/response', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ text: inputText }),
-        });
-
-        const data = await res.json();
-        setResponse(data.response);
-      } catch (error) {
-        console.error('Error posting data:', error);
-        setResponse('There was an error processing your request.');
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  };
-
-  return (      
+  return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        
-    <p>{response}</p>
-      <input 
-      type="text" 
-      value={inputText} 
-      onChange={handleChange} 
-      onKeyDown={handleKeyDown} 
-      placeholder="Type something here" 
-    />
-    <p>You typed: {inputText}</p>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-      </footer>
-    </div>
+      <AppStateProvider>
+        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+
+          <ResponseLog></ResponseLog>
+          <GPTInput></GPTInput>
+        </main>
+        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        </footer>
+      </AppStateProvider>
+    </div >
   );
 }
