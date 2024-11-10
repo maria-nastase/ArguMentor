@@ -12,7 +12,7 @@ export async function POST(req) {
   try {
     const { text } = await req.json();
 
-    conversationHistory.push({ role: 'user', content: `Give a counter argument to this debate argument: "${text}"` });
+    conversationHistory.push({ role: 'user', content: `Give this debate argument a score: "${text}"` });
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4",
@@ -24,7 +24,7 @@ export async function POST(req) {
     // Add the assistant's response to the conversation history
     conversationHistory.push({ role: 'assistant', content: assistantResponse });
 
-    return NextResponse.json({ response: assistantResponse });
+    return NextResponse.json({ score: assistantResponse });
   } catch (error) {
     console.error("Error translating text:", error);
     return NextResponse.json({ error: 'Failed to process the request.' }, { status: 500 });
