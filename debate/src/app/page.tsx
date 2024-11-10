@@ -5,15 +5,18 @@ import React, { useState } from 'react';
 export default function Home() {
 
   const [inputText, setInputText] = useState('');
+  const [response, setResponse] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event) => {
     setInputText(event.target.value);
   };
-  const [response, setResponse] = useState<string | null>(null);
-
 
   const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' && inputText.trim()) {
+    if (event.key === 'Enter' && inputText.trim() && !isLoading) {
+      setIsLoading(true);
+      setResponse(null);
+
       try {
         const res = await fetch('/api/response', {
           method: 'POST',
@@ -27,6 +30,9 @@ export default function Home() {
         setResponse(data.response);
       } catch (error) {
         console.error('Error posting data:', error);
+        setResponse('There was an error processing your request.');
+      } finally {
+        setIsLoading(false);
       }
     }
   };
