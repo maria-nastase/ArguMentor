@@ -9,8 +9,8 @@ export default function SpeechBubble({arr, index}){
         setShowSug(c => !c);
     }
 
-    const containerClasses = "flex w-full "+ (arr.isUser ? "flex-row-reverse mt-[10em] relative" : "flex-row")
-    const bubbleClasses = " rounded-md p-1 mt-6 max-w-[75%] " + (arr.isUser ? "bg-red-500":"bg-blue-500");
+    const containerClasses = "flex w-full "+ (arr.isUser ? "flex-row-reverse relative" : "flex-row");
+    const bubbleClasses = "rounded-md mt-6 max-w-[75%] p-3 text-white " + (arr.isUser ? "bg-orange-400" : "bg-blue-500");
     const classArrow = "absolute -bottom-5 right-10 p-1 bg-blue-900";
 
     return <div key={index} className={containerClasses}>

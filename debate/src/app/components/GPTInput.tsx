@@ -70,6 +70,7 @@ export default function GPTInput(){
               body: JSON.stringify({ text: inputText }),
             });
 
+            setInputText(''); // Clear the input field
             const [suggestionsData, scoreData, data] = await Promise.all([suggestionsRes.then(r => r.json()), scoreRes.then(r => r.json()), res.then(r => r.json())]);
 
             const readData = {
@@ -123,7 +124,7 @@ export default function GPTInput(){
     return (
         <>  
             <textarea
-                style={{ backgroundColor: '#FA9746' }}
+                style={{ backgroundColor: '#FA9746', overflow: 'hidden', marginTop: '10px', marginBottom: '20px' }}
                 className="w-3/4 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 value={inputText}
                 onChange={handleChange}
