@@ -62,6 +62,21 @@ export default function GPTInput(){
             });
 
             const [suggestionsData, scoreData, data] = await Promise.all([suggestionsRes.then(r => r.json()), scoreRes.then(r => r.json()), res.then(r => r.json())]);
+
+            const readData = {
+              text: data.response,
+              score: scoreData.score,
+              suggestion: suggestionsData.suggestion
+            };
+
+            const sRes = fetch('/api/text-to-speech', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ text: readData }),
+            });
+
             addScoreToLog(suggestionsData.suggestion, scoreData.score);
             appendToLog(data.response, false, "", 0);
             setScore(scoreData.score);
