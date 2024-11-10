@@ -1,8 +1,12 @@
 "use client";
-import Image from "next/image";
-import React, { useState } from 'react';
+import GPTInput from './components/GPTInput';
+import AppStateProvider from './components/AppStateContext';
+import ResponseLog from './components/ResponseLog';
 
-export default function Home() {
+
+export default function Home(){
+
+  
 
   const [inputText, setInputText] = useState('');
 
@@ -46,22 +50,19 @@ export default function Home() {
     }
   };
 
-  return (      
+
+  return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-      <input 
-      type="text" 
-      value={inputText} 
-      onChange={handleChange} 
-      onKeyDown={handleKeyDown} 
-      placeholder="Type something here" 
-    />
-    <p>You typed: {inputText}</p>
-    <p>{response}</p>
-    <p>{score}</p>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-      </footer>
-    </div>
+      <AppStateProvider>
+        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+
+          <ResponseLog></ResponseLog>
+          <GPTInput></GPTInput>
+          <p>{score}</p>
+        </main>
+        <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
+        </footer>
+      </AppStateProvider>
+    </div >
   );
 }
