@@ -2,7 +2,7 @@ import { useAppState } from "./AppStateContext";
 
 export default function GPTInput(){
 
-    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore} =  useAppState();
+    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore, setSuggestions} =  useAppState();
 
     const handleChange = (event) => {
         setInputText(event.target.value);
@@ -31,14 +31,20 @@ export default function GPTInput(){
               },
               body: JSON.stringify({ text: inputText }),
             });
-    
-            const [scoreData, data] = await Promise.all([scoreRes.then(r => r.json()), res.then(r => r.json())]);
-            appendToLog(data.response);
-            console.log('Score data:', scoreData);
-            console.log('Setting score:', scoreData.score);
-            setScore(scoreData.score);
-            console.log('Setting score:', scoreData.score);
 
+            const suggestionsRes = fetch('/api/suggestions', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ text: inputText }),
+            });
+
+            const [suggestionsData, scoreData, data] = await Promise.all([suggestionsRes.then(r => r.json()), scoreRes.then(r => r.json()), res.then(r => r.json())]);
+            console.log(suggestionsData.suggestion);
+            appendToLog(data.response);
+            setScore(scoreData.score);
+            setSuggestions(suggestionsData.suggestion);
 
 
           } catch (error) {
