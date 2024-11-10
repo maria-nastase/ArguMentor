@@ -13,6 +13,8 @@ interface AppStateContextProps {
   appendToLog: (t: string, i: boolean) => void;
   score: string | null;
   setScore: React.Dispatch<React.SetStateAction<string | null>>;
+  suggestion: string | null;
+  setSuggestions: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 // Create context
@@ -24,6 +26,7 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [isLoading, setIsLoading] = useState(false);
   const [history, setHistory] = useState([]);
   const [score, setScore] = useState<string | null>(null);
+  const [suggestion, setSuggestions] = useState<string | null>(null);
 
   const appendToLog = (text, isUser) => {
     setHistory(current => [...current, {text, isUser}]);
@@ -40,8 +43,10 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
         history,
         appendToLog,
         score,
-        setScore
-      }), [response, isLoading, inputText, history, score]);
+        setScore,
+        suggestion,
+        setSuggestions
+      }), [response, isLoading, inputText, history, score, suggestion]);
     
     
 
