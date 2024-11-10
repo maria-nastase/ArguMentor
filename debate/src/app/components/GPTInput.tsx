@@ -11,7 +11,7 @@ export default function GPTInput(){
       const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && inputText.trim() && !isLoading) {
           setIsLoading(true);
-          appendToLog(inputText);
+          appendToLog(inputText, true);
     
           try {
             const res = await fetch('/api/response', {
@@ -23,7 +23,7 @@ export default function GPTInput(){
             });
     
             const data = await res.json();
-            appendToLog(data.response);
+            appendToLog(data.response, false);
 
 
 
@@ -45,7 +45,7 @@ export default function GPTInput(){
 
           } catch (error) {
             console.error('Error posting data:', error);
-            appendToLog('There was an error processing your request.');
+            appendToLog('There was an error processing your request.', false);
           } finally {
             setIsLoading(false);
           }
@@ -54,14 +54,15 @@ export default function GPTInput(){
 
     return (
         <>
-            <input
+            <input 
+                style={{ backgroundColor: '#FA9746' }}
+                className="text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 type="text"
                 value={inputText}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Type something here"
             />
-            <p>You typed: {inputText}</p>
         </>
     );
 };
