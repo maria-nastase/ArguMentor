@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
 
-const openai = new OpenAI();
+const openai = new OpenAI(); //just magically uses OPENAI_API_KEY variable, seemingly even if you pass an apiKey option with a different variable
 
 
 let conversationHistory = [];
