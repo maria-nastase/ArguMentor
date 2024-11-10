@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppState } from "./AppStateContext";
+import AudioRecorder from "./AudioRecorder";
 
 export default function GPTInput(){
 
-    const {setInputText, setIsLoading, appendToLog, inputText, isLoading, setScore, setSuggestions, setIsTyping} =  useAppState();
+    const {setInputText, setIsLoading, appendToLog, addScoreToLog, inputText, isLoading, setScore, setSuggestions, setIsTyping} =  useAppState();
 
     const [isRecentlyChanged, setIsRecentlyChanged] = useState(false);
 
@@ -61,15 +62,15 @@ export default function GPTInput(){
             });
 
             const [suggestionsData, scoreData, data] = await Promise.all([suggestionsRes.then(r => r.json()), scoreRes.then(r => r.json()), res.then(r => r.json())]);
-            console.log(suggestionsData.suggestion);
-            appendToLog(data.response);
+            addScoreToLog(suggestionsData.suggestion, scoreData.score);
+            appendToLog(data.response, false, "", 0);
             setScore(scoreData.score);
             setSuggestions(suggestionsData.suggestion);
 
 
           } catch (error) {
             console.error('Error posting data:', error);
-            appendToLog('There was an error processing your request.', false);
+            appendToLog('There was an error processing your request.', false, "", 0.0);
           } finally {
             setIsLoading(false);
           }
@@ -80,13 +81,17 @@ export default function GPTInput(){
         <>
             <input 
                 style={{ backgroundColor: '#FA9746' }}
-                className="text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
+                className="w-1/2 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 type="text"
                 value={inputText}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 placeholder="Type something here"
             />
+            
+          <div className="button">
+            <AudioRecorder />
+            </div>
         </>
     );
 };

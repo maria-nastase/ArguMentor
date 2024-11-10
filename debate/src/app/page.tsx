@@ -2,20 +2,15 @@
 import AppStateProvider from './components/AppStateContext';
 import ResponseLog from './components/ResponseLog';
 import BGImage from './components/BGImage';
-import AudioRecorder from "./components/AudioRecorder";
 
 
 export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <AppStateProvider>
+      <h1>Debate Coach</h1>
         <main className="flex flex-col gap-8 w-full row-start-2 items-center sm:items-start">
-          <h1>Debate Coach</h1>
-          <ResponseLog></ResponseLog>
-          <div className="button">
-            <AudioRecorder />
-            </div>
-            
+          <ResponseLog></ResponseLog>            
         <BGImage></BGImage>
         </main>
         <footer className="absolute w-full bottom-0">

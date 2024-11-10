@@ -1,14 +1,6 @@
 import { useAppState } from "./AppStateContext";
 import GPTInput from "./GPTInput";
-
-function SpeechBubble({arr, index}){
-
-    const classN = "flex w-full "+ (arr.isUser ? "flex-row-reverse mt-10" : "flex-row")
-
-    return <div key={index} className={classN}>
-        <div className={arr.isUser ? "bg-color-red-500":""}>{arr.text}</div>
-    </div>;
-}
+import SpeechBubble from "./SpeechBubble";
 
 export default function ResponseLog(){
     const {history, isLoading, score, suggestion} = useAppState();

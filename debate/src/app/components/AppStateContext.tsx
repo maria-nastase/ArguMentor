@@ -10,7 +10,8 @@ interface AppStateContextProps {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   history: Array<string>;
-  appendToLog: (t: string, i: boolean) => void;
+  appendToLog: (t: string, i: boolean, s: string, ss: number) => void;
+  addScoreToLog: (s: string, n: number) => void;
   score: string | null;
   setScore: React.Dispatch<React.SetStateAction<string | null>>;
   suggestion: string | null;
@@ -31,9 +32,21 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
   const [suggestion, setSuggestions] = useState<string | null>(null);
   const [isTyping, setIsTyping] = useState<boolean>(false);
 
-  const appendToLog = (text, isUser) => {
-    setHistory(current => [...current, {text, isUser}]);
+  const appendToLog = (text, isUser, suggestion="", score=-1) => {
+    setHistory(current => [...current, {text, isUser, suggestion, score}]);
   }
+
+  const addScoreToLog = (suggestion = "", score = -1) => {
+    setHistory(current => {
+      if (current.length === 0) return current; // Handle empty history case
+  
+      return current.map((item, index) => 
+        index === current.length - 1
+          ? { ...item, suggestion, score }
+          : item
+      );
+    });
+  };
 
     // Memorize the context value to avoid unnecessary re-renders
     const contextValue = useMemo(() => ({
@@ -45,6 +58,7 @@ export const AppStateProvider: React.FC<{ children: ReactNode }> = ({ children }
         setIsLoading,
         history,
         appendToLog,
+        addScoreToLog,
         score,
         setScore,
         suggestion,
