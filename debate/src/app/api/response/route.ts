@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
-const openai = new OpenAI({ apiKey: process.env.API_KEY_OPENAI });
+const openai = new OpenAI(); //magically uses OPENAI_API_KEY
 
 
 let conversationHistory = [];

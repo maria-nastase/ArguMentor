@@ -4,12 +4,13 @@ import dotenv from 'dotenv';
 
 dotenv.config(); // Load environment variables
 
-const openai = new OpenAI({  apiKey: process.env.API_KEY_OPENAI });
+const openai = new OpenAI();
 
 
 let conversationHistory = [];
 
 export async function POST(req) {
+  console.log( "what is going on here", process.env.API_KEY_OPENAI)
 
   try {
     const { text } = await req.json();
