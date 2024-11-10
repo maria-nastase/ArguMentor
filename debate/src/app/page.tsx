@@ -15,7 +15,7 @@ export default function Home() {
   const handleKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && inputText.trim()) {
       try {
-        const res = await fetch('/api/gpt', {
+        const res = await fetch('/api/response', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
