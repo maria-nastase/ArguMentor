@@ -1,11 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppState } from "./AppStateContext";
 import AudioRecorder from "./AudioRecorder";
 import AudioPlayer from "./AudioPlayer";
+import AudioComponent from "./AudioComponent";
 
 export default function GPTInput(){
+    const [audioURL, setAudioURL] = useState('/audio/speech.mp3');
+    const audioRef = useRef(null); // Reference to hold the audio element
+    const audioUrlRef = useRef(null); // Reference to hold the current audio URL
 
     const {setInputText, setIsLoading, appendToLog, addScoreToLog, inputText, isLoading, setScore, setSuggestions, setIsTyping} =  useAppState();
+
+    const updateAudioURL = (newURL) => {
+      setAudioURL(newURL); // Update the audio URL to play the new file
+    };
 
     const [isRecentlyChanged, setIsRecentlyChanged] = useState(false);
 
@@ -84,6 +92,25 @@ export default function GPTInput(){
             setSuggestions(suggestionsData.suggestion);
 
 
+            const audioBlob = await sRes.then(r => r.blob());
+                    // Revoke the previous audio URL if it exists
+          if (audioUrlRef.current) {
+            URL.revokeObjectURL(audioUrlRef.current);
+          }
+            const audioUrl = URL.createObjectURL(audioBlob);
+            if (audioRef.current) {
+              audioRef.current.pause(); // Pause the currently playing audio if any
+              audioRef.current.currentTime = 0; // Reset playback position
+            }
+    
+            // Create a new audio element and play the new audio
+            const newAudio = new Audio(audioUrl);
+            newAudio.play();
+    
+            // Save the new audio element to the ref
+            audioRef.current = newAudio;
+            audioUrlRef.current = audioUrl; 
+
           } catch (error) {
             console.error('Error posting data:', error);
             appendToLog('There was an error processing your request.', false, "", 0.0);
@@ -94,8 +121,8 @@ export default function GPTInput(){
       };
 
     return (
-        <>
-            <textarea 
+        <>  
+            <textarea
                 style={{ backgroundColor: '#FA9746' }}
                 className="w-3/4 text-white border-none placeholder-white focus:outline-none p-3 rounded-md"
                 value={inputText}
@@ -104,10 +131,8 @@ export default function GPTInput(){
                 placeholder="Type something here"
             />
             
-          <div className="button">
-            <AudioRecorder />
-          </div>
-          <AudioPlayer />
+          
+        
         </>
 
     );

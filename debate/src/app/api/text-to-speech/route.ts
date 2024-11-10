@@ -18,16 +18,16 @@ export async function POST(req) {
       input: body.text,
     });    
 
-    // Define the file path
-    const speechFilePath = path.join(process.cwd(), 'public', 'audio', 'speech.mp3');
-    const buffer = Buffer.from(await speech.arrayBuffer());
+    const buffer = Buffer.from(await speech.arrayBuffer());  // Create a buffer from the audio data
 
-    // Ensure directory exists
-    await fs.promises.mkdir(path.dirname(speechFilePath), { recursive: true });
-    await fs.promises.writeFile(speechFilePath, buffer);
-
-    // Respond with success and file path
-    return NextResponse.json({ message: 'Audio file created successfully', filePath: '/audio/speech.mp3' });
+    // Respond with the MP3 data directly in the response
+    return new NextResponse(buffer, {
+      status: 200,
+      headers: {
+        'Content-Type': 'audio/mp3',  // Specify the content type as MP3
+        'Content-Length': buffer.length, // Specify the length of the content
+      },
+    });
   } catch (error) {
     console.error("Error generating audio:", error);
     return NextResponse.json({ error: 'Failed to generate audio.' }, { status: 500 });

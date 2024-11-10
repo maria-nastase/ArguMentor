@@ -3,6 +3,8 @@ import AppStateProvider from './components/AppStateContext';
 import ResponseLog from './components/ResponseLog';
 import BGImage from './components/BGImage';
 import AudioPlayer from './components/AudioPlayer';
+import AudioComponent from './components/AudioComponent';
+import GPTInput from './components/GPTInput';
 
 
 export default function Home() {
@@ -13,6 +15,8 @@ export default function Home() {
         <main className="flex flex-col gap-8 w-full row-start-2 items-center sm:items-start">
           <ResponseLog></ResponseLog>            
         <BGImage></BGImage>
+      
+
         </main>
         <footer className="w-full bottom-0">
           <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
