@@ -8,3 +8,6 @@ ArguMentor serves as a virtual debate coach, enhancing learning in a fun and int
 
 ## How we built it
 ArguMentor was mainly built using Typescript, with React and Tailwind CSS for a responsive and dynamic frontend. We used Next.js/Node.js for server-side rendering and the backend APIs. The app leverages OpenAI's GPT-4 API for argument analysis and counter-argument generation, and Whisper API for text-to-speech functionality.
+
+## Learn more
+https://devpost.com/software/argumentor-lnxa7k
